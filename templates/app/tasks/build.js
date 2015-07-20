@@ -137,6 +137,7 @@ gulp.task('build:dist', ['build:all'], function () {
 });
 
 function onBrowserifyError(err) {
-  gutil(gutil.colors.red('ERROR'), gutil.colors.grey(err.message));
+  //gutil(gutil.colors.red('ERROR'), gutil.colors.grey(err.message));
+  console.log(err.message);
   this.emit('end');
 };
