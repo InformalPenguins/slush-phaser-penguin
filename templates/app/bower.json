@@ -1,0 +1,9 @@
+{
+  "name": "<%= nameSlug %>",
+  "version": "0.0.1",
+  "private": true,
+
+  "devDependencies": {
+    "phaser": "<%= phaser %>"
+  }
+}
