@@ -19,6 +19,7 @@ var stylus = require('gulp-stylus');
 var source = require('vinyl-source-stream');
 var uglify = require('gulp-uglify');
 var zip = require('gulp-zip');
+var watch = require('gulp-watch');
 
 var cfg = require('../config');
 
@@ -64,26 +65,34 @@ gulp.task('build:all', [
 ]);
 
 gulp.task('build:audio', function () {
-  return gulp.src('./assets/audio/**/*')
+  var src = './assets/audio/**/*';
+  return gulp.src(src)
+    .pipe(watch(src))
     .pipe(gulp.dest('./build/assets/audio/'))
     .pipe(browserSync.reload({stream: true, once: true}));
 });
 
 gulp.task('build:fonts', function () {
-  return gulp.src('./assets/fonts/**/*')
+  var src = './assets/fonts/**/*';
+  return gulp.src(src)
+    .pipe(watch(src))
     .pipe(gulp.dest('./build/assets/fonts'))
     .pipe(browserSync.reload({stream: true, once: true}));
 });
 
 gulp.task('build:images', function () {
-  return gulp.src(['./assets/*.jpg', './assets/*.png'])
+  var src = ['./assets/*.jpg', './assets/*.png']
+  return gulp.src(src)
+    .pipe(watch(src))
     .pipe(imagemin())
     .pipe(gulp.dest('./build/assets/'))
     .pipe(browserSync.reload({stream: true, once: true}));
 });
 
 gulp.task('build:html', function () {
-  return gulp.src('./src/*jade')
+  var src = './src/*jade';
+  return gulp.src(src)
+    .pipe(watch(src))
     .pipe(jade({
       pretty: !program.prod,
       data: {
@@ -96,7 +105,9 @@ gulp.task('build:html', function () {
 });
 
 gulp.task('build:js', function () {
-  return browserify('./src/scripts/main.js', {debug: !program.prod})
+  var src = './src/scripts/main.js';
+  return browserify(src, {debug: !program.prod})
+    .pipe(watch(src))
     .bundle()
     .on('error', onBrowserifyError)
     .pipe(source('game.js'))
@@ -108,7 +119,9 @@ gulp.task('build:js', function () {
 });
 
 gulp.task('build:css', function () {
-  return gulp.src('./src/stylesheets/*.styl')
+  var src = './src/stylesheets/*.styl';
+  return gulp.src(src)
+    .pipe(watch(src))
     .pipe(stylus())
     .pipe(buffer())
     .pipe(gulpif(program.prod, cssmin()))
@@ -117,6 +130,7 @@ gulp.task('build:css', function () {
 });
 
 gulp.task('build:vendors', function () {
+  // TODO: Improve to automatically include vendors, concatenate and uglyfy them
   var bowerConfig = JSON.parse(fs.readFileSync('./.bowerrc', 'utf8'));
 
   return gulp.src('./' + bowerConfig['directory'] + '/phaser/build/phaser*')
