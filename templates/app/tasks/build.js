@@ -13,7 +13,6 @@ var cssmin = require('gulp-cssmin');
 var ignore = require('gulp-ignore');
 var imagemin = require('gulp-imagemin');
 var jade = require('gulp-jade');
-var linter = require('gulp-eslint');
 var rename = require('gulp-rename');
 var size = require('gulp-size');
 var stylus = require('gulp-stylus');
@@ -135,12 +134,6 @@ gulp.task('build:dist', ['build:all'], function () {
     .pipe(gulpif(program.compress, zip('build.zip')))
     .pipe(size())
     .pipe(gulp.dest('./dist/'))
-});
-
-gulp.task('lint', function () {
-  gulp.src('./src/scripts/**/*.js')
-    .pipe(linter())
-    .pipe(linter.format());
 });
 
 function onBrowserifyError(err) {

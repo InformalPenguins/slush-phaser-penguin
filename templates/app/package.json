@@ -12,7 +12,6 @@
     "gulp": "^3.8.7",
     "gulp-buffer": "0.0.2",
     "gulp-cssmin": "^0.1.6",
-    "gulp-eslint": "^0.1.8",
     "gulp-if": "^1.2.4",
     "gulp-ignore": "^1.2.0",
     "gulp-imagemin": "^1.0.1",
