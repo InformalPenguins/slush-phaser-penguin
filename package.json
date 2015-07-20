@@ -16,6 +16,13 @@
     "canvas",
     "webgl"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/InformalPenguins/slush-phaser-penguin"
+  },
+  "bugs": {
+    "url": "https://github.com/InformalPenguins/slush-phaser-penguin/issues"
+  },
   "dependencies": {
     "gulp": "^3.8.7",
     "gulp-conflict": "^0.2.0",
